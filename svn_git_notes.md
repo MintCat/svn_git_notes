@@ -1,5 +1,5 @@
 # <p align = "center"> SVN和Git笔记 </p>
-##概念
+## 概念
 1. SVN是集中式版本控制系统，Git是分布式版本控制系统。
 
 2. Git也有自己的集中式版本库或服务器，同时git在自己电脑上clone的本地版本库和中心版本库一模一样，可以在本地进行SVN下需要联网才能操作的版本控制工作。Git通过`git pull`与`git push`与中心版本库保持同步。
@@ -10,7 +10,7 @@
 
 5. 关于可视化工具，SVN推荐使用CornerStone，git推荐使用Github桌面版或者SourceTree。
 
-##SVN配置
+## SVN配置
 - 在本地创建svn目录,如将其放在/usr/local/中（或其他你想要的文件夹）。
 
 	```
@@ -82,22 +82,22 @@
 	1. 在终端中输入`svnserve -d -r /usr/local/svn/code`来启动svn，没有任何提示说明启动成功了。
 	2. 首次配置完先关闭svn服务器再进行数据的上传和下载操作，可以通过Mac的活动监视器来关闭svn服务器。
 
-##SVN命令
-###本地的代码导入服务器
+## SVN命令
+### 本地的代码导入服务器
 
 ```
 svn import project_path server_path --username=Will --password=123456 -m "本地代码导入服务器"
 ```
 project\_path是本地工程路径，server\_path是服务器上放置工程的路径。
 
-###服务器代码检出到本地
+### 服务器代码检出到本地
 
 ```
 svn checkout server_path --username=Will --password=123456 local_path
 ```
 server\_path是服务器上放置工程的路径，local\_path是要检出的本地路径。
 
-###更新服务器代码到本地
+### 更新服务器代码到本地
 
 ```
 svn update
@@ -114,14 +114,14 @@ svn update -r version_num file_name
 ```
 将指定文件更新到指定版本。
 
-###提交代码
+### 提交代码
 ```
 svn commit -m "message"
 ```
 
 message是提交的说明信息，前面以-m修饰。
 
-###查看SVN状态
+### 查看SVN状态
 ```
 svn status
 ```
@@ -138,7 +138,7 @@ svn status -v file_name
 ```
 显示文件和其子目录状态。
 
-###添加文件
+### 添加文件
 ```
 svn add file_name
 ```
@@ -149,13 +149,13 @@ svn add xxx@2x.png@
 ```   
 添加图片或带@符号的文件时，需要在文件名后面再加一个@，这是因为svn命令最后需要用@符号来指定一个版本导致的。
 
-###删除文件
+### 删除文件
 ```
 svn delete file_nae
 ```
 执行该命令后，文件在status中会被标记为D（删除），在commit后，文件确定被删除。有些被直接从本地移除的文件，也需要通过该命令标记为删除后再提交，从而与中心版本库保持同步。
 
-###比较差异
+### 比较差异
 ```
 svn diff file_name
 ```
@@ -166,7 +166,7 @@ svn diff -r m:n file_name
 ```
 对比指定文件版本m与版本n之间的差异。
 
-###恢复本地修改
+### 恢复本地修改
 ```
 svn revert
 ```
@@ -177,22 +177,22 @@ svn revert file_name
 ```
 恢复指定文件未提交的修改。
 
-###显示文件内容
+### 显示文件内容
 ```
 svn cat file_name
 ```
 
-###查看日志
+### 查看日志
 ```
 svn log
 ```
 
-###重命名目录/文件
+### 重命名目录/文件
 ```
 svn move file_name new_file_name
 ```
 
-###创建版本控制下的新目录
+### 创建版本控制下的新目录
 ```
 svn mkdir local_folder_name
 ```
@@ -204,13 +204,13 @@ svn mkdir -m “message” server_folder_url
 ```
 在中心版本指定位置创建一个文件夹。本地需要`update`显示。
 
-###解决冲突
+### 解决冲突
 ```
 svn resolved
 ```
 该命令通常只是移除冲突状态，要真正解决冲突，往往还要到代码中去根据提示选择要删除和保留的代码，然后再次提交。
 
-###加锁/解锁
+### 加锁/解锁
 ```
 svn lock -m "message" file_name
 ```
@@ -221,7 +221,7 @@ svn unlock file_name
 ```
 解锁指定文件。
 
-###复制文件及创建分支
+### 复制文件及创建分支
 ```
 svn copy file_name copied_file_name
 ```
@@ -237,7 +237,7 @@ svn copy -m "creat a branch" master_path branch_path
 ```
 SVN里分支的创建本质是对主线的一种复制。
 
-###合并文件及合并分支
+### 合并文件及合并分支
 ```
 svn merge -r m:n file_path
 ```
@@ -258,14 +258,14 @@ svn merge --reintegrate branch_server_path
 ```
 --reintegrate参数表示重新整理代码。
 
-###删除分支
+### 删除分支
 ```
 svn delete -m "delete message" branch_server_path
 ```
 
 删除分支即是直接删除中心版本库上的资料。
 
-###Switch
+### Switch
 SVN的中心版本库里可以有多个项目仓库，每个项目仓库也可以有多个`Branch`和`Tag`，这些仓库、分支、标签对应的地址都不同， 使用switch即是将本地项目仓库或者仓库里的文件的对应服务器地址切换为要更改的地址。所有的更改也将提交到更改地址对应的服务器仓库上。
 
 ```
