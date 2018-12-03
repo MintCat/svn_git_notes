@@ -1,4 +1,2 @@
 # svn_git_notes
-Notes with svn and git.
-
-This is a code.
+This is a code.Notes with svn and git.Notes with svn and git.
